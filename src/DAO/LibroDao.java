@@ -8,7 +8,8 @@ import Modelo.Libro;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
-/**
+import java.sql.*;
+/*
  *
  * @author umg
  */
@@ -22,13 +23,13 @@ public class LibroDao {
        
        try(Connection conn = connFactory.getConnection();
            PreparedStatement ps = conn.prepareStatement(sql);
-           ResultSet rs = ps.executeQuerry()){
+           ResultSet rs = ps.executeQuery()){
            
            while(rs.next()){
                Libro lib = new Libro(
-               ps.getId("id"),
-               ps.getString("titulo"),
-               ps.getString("autor"),
+               ps.setId("id"),
+               ps.setString("titulo"),
+               ps.setString("autor"),
                ps.getId("year"),
                ps.getId("paginas"),
                ps.getString("genero"),
